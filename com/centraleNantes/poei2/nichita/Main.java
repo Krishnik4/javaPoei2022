@@ -8,7 +8,8 @@ public class Main {
 		//ex1();
 		//ex2();
 		//ex3();
-		ex4();
+		//ex4();
+		ex5();
 
 	}
 	//ex1
@@ -61,19 +62,19 @@ public class Main {
 	public static void ex3(){
 		Scanner keyboardInput = new Scanner(System.in);
 		System.out.println("Enter the number of the day of the week : ");
-		System.out.println("The day is : " + getDayIf(keyboardInput.nextInt()));
+		System.out.println("The day is : " + getDaySwitch(keyboardInput.nextInt()));
 	}
 	public static String getDaySwitch(int day){
-		switch (day){
-			case 1: return "Monday";
-			case 2: return "Tuesday";
-			case 3: return "Wednesday";
-			case 4: return "Thursday";
-			case 5: return "Friday";
-			case 6: return "Saturday";
-			case 7: return "Sunday";
-			default: return "";
-		}
+		return switch (day) {
+			case 1 -> "Monday";
+			case 2 -> "Tuesday";
+			case 3 -> "Wednesday";
+			case 4 -> "Thursday";
+			case 5 -> "Friday";
+			case 6 -> "Saturday";
+			case 7 -> "Sunday";
+			default -> "";
+		};
 	}
 
 
@@ -85,5 +86,34 @@ public class Main {
 		days.put("French", Arrays.asList("Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"));
 		System.out.println("Enter language and desired day of the week : ");
 		System.out.println(days.get(keyboardInput.nextLine()).get(keyboardInput.nextInt()-1));
+	}
+
+
+	//ex5
+	public static void ex5() {
+		System.out.println("Enter the number of the desired day of the week : ");
+		defaultFunction();
+		errorFunction();
+	}
+	public static String getDayList(int day){
+		List<String> days = Arrays.asList("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday");
+		return days.get(day-1);
+	}
+	public static void errorFunction() {
+		Scanner keyboardInput = new Scanner(System.in);
+		try{
+			System.out.println(getDayList(keyboardInput.nextInt()));
+		} catch (Exception e) {
+			System.out.println("A week has 7 days");
+		}
+	}
+
+	public static void defaultFunction(){
+		Scanner keyboardInput = new Scanner(System.in);
+		try{
+			System.out.println(getDayList(keyboardInput.nextInt()));
+		} catch (Exception e) {
+			System.out.println(getDayList(1));
+		}
 	}
 }
