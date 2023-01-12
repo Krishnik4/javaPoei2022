@@ -1,4 +1,4 @@
-package com.centraleNantes.poei2.boris;
+package com.centraleNantes.poei2.nichita;
 
 import java.util.ArrayList;
 import java.util.List;
