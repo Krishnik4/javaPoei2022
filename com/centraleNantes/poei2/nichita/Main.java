@@ -9,8 +9,8 @@ public class Main {
 		//ex2();
 		//ex3();
 		//ex4();
-		ex5();
-
+		//ex5();
+		exBook();
 	}
 	//ex1
 	public static void ex1(){
@@ -116,4 +116,20 @@ public class Main {
 			System.out.println(getDayList(1));
 		}
 	}
+
+
+	//exBook
+	public static void exBook(){
+		Book book = new Book("Guide to naming books",Arrays.asList(
+				new Chapter("Guide to naming chapters",1,100),
+				new Chapter("Naming chapters, part 2",101,200),
+				new Chapter("Mastering chapter names",201,300)
+		));
+		System.out.println("Book Name : " + book.name);
+		System.out.println("Chapter at page 57 : " + book.getChapterName(57));
+		System.out.println("Chapter at page 134 : " + book.getChapterName(134));
+		System.out.println("Chapter at page 278 : " + book.getChapterName(278));
+		System.out.println("Chapter at page 4532 : " + book.getChapterName(4532));
+	}
+
 }
