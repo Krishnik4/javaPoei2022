@@ -1,4 +1,4 @@
-package com.centraleNantes.poei2.nichita;
+package com.centraleNantes.poei2.nichita.BookEx;
 
 public class Chapter {
     String name;

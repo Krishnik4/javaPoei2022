@@ -1,17 +1,29 @@
 package com.centraleNantes.poei2.nichita;
 
+import com.centraleNantes.poei2.nichita.YouTubeEx.Video;
+
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
 
 	public static void main(String[] args) {
-		//ex1();
-		//ex2();
-		//ex3();
-		//ex4();
-		//ex5();
+		/*
+		ex1();
+		ex2();
+		ex3();
+		ex4();
+		ex5();
+
 		exBook();
+
+		exYoutube();
+
+		 */
+		exRnJ();
 	}
+
+	/*
 	//ex1
 	public static void ex1(){
 		Scanner keyboardInput = new Scanner(System.in);
@@ -120,11 +132,13 @@ public class Main {
 
 	//exBook
 	public static void exBook(){
+
 		Book book = new Book("Guide to naming books",Arrays.asList(
 				new Chapter("Guide to naming chapters",1,100),
 				new Chapter("Naming chapters, part 2",101,200),
 				new Chapter("Mastering chapter names",201,300)
 		));
+
 		System.out.println("Book Name : " + book.name);
 		System.out.println("Chapter at page 57 : " + book.getChapterName(57));
 		System.out.println("Chapter at page 134 : " + book.getChapterName(134));
@@ -132,4 +146,59 @@ public class Main {
 		System.out.println("Chapter at page 4532 : " + book.getChapterName(4532));
 	}
 
+
+
+
+	//exYoutube
+	public static void exYoutube(){
+		System.out.println(Video.instanceNumber);
+		Video v1 = new Video(1,"1", new Date(),new ArrayList<>());
+		System.out.println(Video.instanceNumber);
+		Video v2 = new Video(2,"2", new Date(),new ArrayList<>());
+		System.out.println(Video.instanceNumber);
+
+	}
+	 */
+
+	//exRnJ
+
+	public static void exRnJ(){
+		//1
+		List<String> words = Arrays.asList("Friar Laurence: Two households, both alike in dignity in fair Verona, where we lay our scene from ancient grudge break to new mutiny. Where civil blood makes civil hands unclean. From forth the fatal loins of these two foes. A pair of star-crossed lovers take their life whose misadventured piteous overthrows. Do with their death bury their parents strife the fearful passage of their death marked love. And the continuance of their parents’s rage which but their childrens? end, nought could remove. Is now the two hours traffic of our stage the which if you with patient ears attend what here shall miss, our toil shall strive to mend.".split("\\s+"));
+
+		for (int i = 0; i < words.size(); i++) {
+			words.set(i,words.get(i).toLowerCase());
+		}
+		Collections.sort(words);
+		System.out.println(words);
+
+		//2
+		System.out.println(words.stream().filter((word)->word.length()>2).collect(Collectors.toList()));
+
+		//3
+		System.out.println(words.stream().filter((word) -> word.length() > 2).distinct().sorted().collect(Collectors.toList()));
+
+		//4
+		System.out.println(words.stream().collect(Collectors.groupingBy(w->w,Collectors.counting())));
+
+		//5
+		SortedSet<Map.Entry<String,Long>> set = new TreeSet<>((e1, e2) -> {int res=(int) (e2.getValue() - e1.getValue());return res!=0?res:1;});
+		set.addAll(words.stream().collect(Collectors.groupingBy(w->w,Collectors.counting())).entrySet());
+		System.out.println(set);
+
+		//6
+		String text = "Friar Laurence: Two households, both alike in dignity in fair Verona, where we lay our scene from ancient grudge break to new mutiny. Where civil blood makes civil hands unclean. From forth the fatal loins of these two foes. A pair of star-crossed lovers take their life whose misadventured piteous overthrows. Do with their death bury their parents strife the fearful passage of their death marked love. And the continuance of their parents’s rage which but their childrens? end, nought could remove. Is now the two hours traffic of our stage the which if you with patient ears attend what here shall miss, our toil shall strive to mend.".toLowerCase();
+		Map<String,List<Integer>> wordsWithIndexes = new HashMap<>();
+		for(String word:words){
+			List<Integer> indexes = new ArrayList<>();
+			Integer tmpIndex=text.indexOf(word+" ");
+			while(tmpIndex>=0){
+				indexes.add(tmpIndex);
+				tmpIndex=text.indexOf(word+ " ",tmpIndex+1);
+			}
+			wordsWithIndexes.putIfAbsent(word,indexes);
+		}
+		System.out.println(wordsWithIndexes);
+
+	}
 }
